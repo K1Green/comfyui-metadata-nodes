@@ -1,0 +1,15 @@
+# ComfyUI Metadata Nodes - Python Requirements
+#
+# Note: These packages are typically already installed with ComfyUI.
+# Only install if you encounter import errors.
+
+# Core dependencies (usually pre-installed with ComfyUI)
+torch>=1.13.0
+Pillow>=9.0.0
+numpy>=1.21.0
+
+# External tools (install separately - NOT Python packages)
+# ===========================================================
+# ExifTool 13.44+ - Required for FFpy ExifTool node
+# Download from: https://exiftool.org/
+# Installation instructions: See INSTALLATION.md

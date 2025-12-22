@@ -1,0 +1,166 @@
+{
+  "1": {
+    "inputs": {
+      "prompt": "majestic photorealistic snow leopard high on a mountain at sunset with valley below",
+      "negative_prompt": "",
+      "prompt_suffix": "",
+      "seed": "",
+      "model_version": "image4_standard",
+      "size": "1024x1024 (1:1)",
+      "num_variations": 1,
+      "content_class": "photo",
+      "style_preset": "None",
+      "upsampler_type": "default",
+      "visual_intensity": "",
+      "structure_strength": "",
+      "style_strength": "",
+      "custom_model_id": "",
+      "prompt_biasing_locale": ""
+    },
+    "class_type": "FireflyTextToImageNode",
+    "_meta": {
+      "title": "Firefly Text to Image"
+    }
+  },
+  "2": {
+    "inputs": {
+      "images": ["1", 0]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Generated Image"
+    }
+  },
+  "3": {
+    "inputs": {
+      "image": ["1", 0],
+      "filename_prefix": "AI_Snow_Leopard",
+      "title": "AI Snow Leopard",
+      "description": "majestic photorealistic snow leopard high on a mountain at sunset with valley below",
+      "keywords": "AI, Firefly, Wildlife",
+      "creator": "Kevin Green",
+      "copyright": "2025",
+      "rating": 5,
+      "label": "Blue",
+      "custom_metadata": "",
+      "output_path": ""
+    },
+    "class_type": "FFpySaveWithMetadataNode",
+    "_meta": {
+      "title": "Save with Metadata"
+    }
+  },
+  "4": {
+    "inputs": {
+      "text_0": ["3", 1]
+    },
+    "class_type": "ShowText|pysssss",
+    "_meta": {
+      "title": "Show Save Debug Log"
+    }
+  },
+  "5": {
+    "inputs": {
+      "folder_path": "/Users/kevin/Applications/Development/ComfyUI/output",
+      "image_index": 0,
+      "file_pattern": "AI_Snow_Leopard*.png",
+      "sort_by": "date_modified",
+      "sort_order": "descending",
+      "recursive": false
+    },
+    "class_type": "FFpyLoadImageFolderNode",
+    "_meta": {
+      "title": "Load Image from Folder"
+    }
+  },
+  "6": {
+    "inputs": {
+      "images": ["5", 0]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Loaded Image"
+    }
+  },
+  "7": {
+    "inputs": {
+      "text_0": ["5", 3]
+    },
+    "class_type": "ShowText|pysssss",
+    "_meta": {
+      "title": "Show Load Debug Log"
+    }
+  },
+  "8": {
+    "inputs": {
+      "text_0": ["5", 2]
+    },
+    "class_type": "ShowText|pysssss",
+    "_meta": {
+      "title": "Show Filename"
+    }
+  },
+  "9": {
+    "inputs": {
+      "operation": "Read All Metadata",
+      "image": ["5", 0],
+      "file_path": ["5", 1],
+      "output_format": "Pretty JSON",
+      "group_filter": "",
+      "tag_names": "",
+      "metadata_to_write": "",
+      "preserve_existing": true,
+      "include_binary": false,
+      "extract_embedded": false
+    },
+    "class_type": "FFpyExifToolNode",
+    "_meta": {
+      "title": "ExifTool - Read All Metadata"
+    }
+  },
+  "10": {
+    "inputs": {
+      "text_0": ["9", 1]
+    },
+    "class_type": "ShowText|pysssss",
+    "_meta": {
+      "title": "Show All Metadata (JSON)"
+    }
+  },
+  "11": {
+    "inputs": {
+      "text_0": ["9", 2]
+    },
+    "class_type": "ShowText|pysssss",
+    "_meta": {
+      "title": "Show ExifTool Debug Log"
+    }
+  },
+  "12": {
+    "inputs": {
+      "operation": "Read Specific Tags",
+      "image": ["5", 0],
+      "file_path": ["5", 1],
+      "output_format": "Human Readable",
+      "group_filter": "",
+      "tag_names": "Title\nDescription\nAuthor\nCopyright\nSubject",
+      "metadata_to_write": "",
+      "preserve_existing": true,
+      "include_binary": false,
+      "extract_embedded": false
+    },
+    "class_type": "FFpyExifToolNode",
+    "_meta": {
+      "title": "ExifTool - Read Specific Metadata"
+    }
+  },
+  "13": {
+    "inputs": {
+      "text_0": ["12", 1]
+    },
+    "class_type": "ShowText|pysssss",
+    "_meta": {
+      "title": "Show Specific Metadata (Readable)"
+    }
+  }
+}

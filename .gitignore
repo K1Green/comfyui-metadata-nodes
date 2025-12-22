@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.pyc
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+
+# Test files
+test_*.py
+*_test.py
+
+# Output files (don't commit generated images)
+output/
+temp/
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+
+# Exceptions (allow example images in examples folder)
+!examples/*.png
+!examples/*.jpg
+!examples/*.jpeg

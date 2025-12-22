@@ -1,0 +1,166 @@
+{\rtf1\ansi\deff0
+{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset0 Arial;}}
+{\colortbl;\red0\green0\blue0;\red0\green0\blue255;}
+
+\viewkind4\uc1\pard\sa200\sl276\slmult1\f0\fs44\b FFpy Read EXIF Data from File Workflow\b0\fs22\par
+
+\fs28\b Overview\b0\fs22\par
+The "Read EXIF data from file" workflow is a ComfyUI workflow designed to extract and display comprehensive metadata from image files. This workflow leverages ExifTool 13.44, the industry-standard metadata processing tool, to read EXIF, XMP, IPTC, and other metadata formats embedded in images.\par
+
+\fs28\b Workflow Capabilities\b0\fs22\par
+
+\fs24\b Metadata Format Support\b0\fs22\par
+The workflow can extract multiple metadata formats from image files:\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720
+\b EXIF Data\b0  - Camera settings, dates, GPS coordinates, exposure settings, ISO, aperture, shutter speed\par
+{\pntext\f1\'B7\tab}\b XMP Metadata\b0  - Adobe extensible metadata including Dublin Core schema (title, description, creator, copyright, keywords)\par
+{\pntext\f1\'B7\tab}\b IPTC Data\b0  - News and journalism metadata standards\par
+{\pntext\f1\'B7\tab}\b PNG Text Chunks\b0  - Native PNG metadata fields\par
+{\pntext\f1\'B7\tab}\b Maker Notes\b0  - Camera manufacturer-specific metadata\par
+{\pntext\f1\'B7\tab}\b ICC Profiles\b0  - Color management information\par
+\pard\sa200\sl276\slmult1\par
+
+\fs24\b Display Modes\b0\fs22\par
+The workflow offers two complementary display modes:\par
+
+\i 1. Verbose Metadata (All Fields)\i0\par
+This mode extracts and displays \b all available metadata\b0  from the image file in JSON format. It provides:\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720
+Complete metadata inventory across all format groups\par
+{\pntext\f1\'B7\tab}Grouped organization (EXIF, XMP, PNG, etc.)\par
+{\pntext\f1\'B7\tab}Field counts and breakdowns by metadata group\par
+{\pntext\f1\'B7\tab}Ideal for comprehensive metadata auditing and discovery\par
+\pard\sa200\sl276\slmult1\par
+
+\i 2. Specific Metadata (Targeted Fields)\i0\par
+This mode reads only \b user-specified metadata tags\b0  and displays them in a human-readable format. Features include:\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720
+Custom tag selection (e.g., Title, Description, Author, Copyright, Subject)\par
+{\pntext\f1\'B7\tab}Clean, formatted output for easy reading\par
+{\pntext\f1\'B7\tab}Perfect for extracting specific metadata fields needed for workflows\par
+\pard\sa200\sl276\slmult1\par
+
+\fs28\b How the Workflow Works\b0\fs22\par
+
+\fs24\b Node Structure\b0\fs22\par
+The workflow consists of three main components:\par
+
+\b 1. Load Image from Folder (Node 5)\b0\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720
+Scans a specified folder for image files\par
+{\pntext\f1\'B7\tab}Supports file pattern matching (e.g., *.png, willow_river*.jpg)\par
+{\pntext\f1\'B7\tab}Sorts files by date modified, date created, size, or name\par
+{\pntext\f1\'B7\tab}Returns both the image tensor and the critical file_path for metadata extraction\par
+\pard\sa200\sl276\slmult1\par
+
+\b 2. ExifTool - Read All Metadata (Node 9)\b0\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720
+Receives the file_path from the load node\par
+{\pntext\f1\'B7\tab}Executes ExifTool to extract all metadata fields\par
+{\pntext\f1\'B7\tab}Outputs comprehensive JSON with complete metadata inventory\par
+{\pntext\f1\'B7\tab}Displays field count and breakdown by metadata group\par
+\pard\sa200\sl276\slmult1\par
+
+\b 3. ExifTool - Read Specific Metadata (Node 12)\b0\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720
+Also receives the file_path from the load node\par
+{\pntext\f1\'B7\tab}Extracts only user-specified tags (Title, Description, Author, Copyright, Subject)\par
+{\pntext\f1\'B7\tab}Formats output in human-readable report format\par
+{\pntext\f1\'B7\tab}Provides clean, organized display of selected metadata\par
+\pard\sa200\sl276\slmult1\par
+
+\fs24\b Critical Architecture Feature\b0\fs22\par
+The workflow uses \b direct file path access\b0  rather than image tensor processing. This is critical because:\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720
+Metadata exists in the PNG/JPEG file structure, not in pixel data\par
+{\pntext\f1\'B7\tab}Image tensors (NumPy arrays) only contain RGB values\par
+{\pntext\f1\'B7\tab}ExifTool reads metadata directly from the file on disk\par
+{\pntext\f1\'B7\tab}This ensures complete, accurate metadata extraction\par
+\pard\sa200\sl276\slmult1\par
+
+\fs28\b Testing Results\b0\fs22\par
+The workflow was tested with two distinct image types to validate its versatility:\par
+
+\fs24\b Test 1: Camera Image - "Willow River"\b0\fs22\par
+\b Image Type:\b0  Photograph captured with a digital camera\par
+
+\b Metadata Extracted:\b0\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720
+\b EXIF Data:\b0  Camera make and model, lens information, exposure settings (ISO, aperture, shutter speed), focal length, flash settings, white balance\par
+{\pntext\f1\'B7\tab}\b Date/Time:\b0  Original capture date and time\par
+{\pntext\f1\'B7\tab}\b Camera Settings:\b0  Complete shooting parameters\par
+{\pntext\f1\'B7\tab}\b GPS Data:\b0  Location coordinates (if available)\par
+{\pntext\f1\'B7\tab}\b Maker Notes:\b0  Canon/Nikon/Sony-specific technical data\par
+\pard\sa200\sl276\slmult1\par
+
+\b Results:\b0  The workflow successfully extracted comprehensive camera metadata, demonstrating full EXIF compatibility with traditional photography.\par
+
+\fs24\b Test 2: AI Generated Image - "Snow Tiger"\b0\fs22\par
+\b Image Type:\b0  AI-generated image from Adobe Firefly\par
+
+\b Metadata Extracted:\b0\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720
+\b XMP Metadata:\b0  Dublin Core schema fields\par
+{\pntext\f1\'B7\tab}\b PNG Text Chunks:\b0  Title, description, keywords\par
+{\pntext\f1\'B7\tab}\b Creator Information:\b0  Artist/creator attribution\par
+{\pntext\f1\'B7\tab}\b Copyright:\b0  Rights management information\par
+{\pntext\f1\'B7\tab}\b Generation Details:\b0  AI generation parameters and prompt information\par
+\pard\sa200\sl276\slmult1\par
+
+\b Results:\b0  The workflow successfully extracted XMP and PNG metadata from the AI-generated image, demonstrating compatibility with modern AI image workflows and content authentication standards.\par
+
+\fs28\b Key Findings\b0\fs22\par
+The testing validated several important capabilities:\par
+
+\pard{\pntext\f1 1.\tab}{\*\pn\pnlvlbody\pnf1\pnindent0\pnstart1\pndec{\pntxta.}}\fi-360\li720
+\b Universal Compatibility:\b0  Works with both traditional camera images (EXIF-heavy) and AI-generated images (XMP/PNG-heavy)\par
+
+{\pntext\f1 2.\tab}\b Metadata Diversity:\b0  Successfully reads different metadata formats depending on image source:\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li1080
+Camera images: Rich EXIF technical data\par
+{\pntext\f1\'B7\tab}AI images: Creative metadata, attribution, and generation context\par
+\pard\sa200\sl276\slmult1\par
+
+\pard{\pntext\f1 3.\tab}{\*\pn\pnlvlbody\pnf1\pnindent0\pnstart1\pndec{\pntxta.}}\fi-360\li720
+\b Flexible Display:\b0  The dual-mode approach (verbose vs. specific) accommodates both:\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li1080
+Technical users needing complete metadata inspection\par
+{\pntext\f1\'B7\tab}Creative users wanting clean, readable attribution information\par
+\pard\sa200\sl276\slmult1\par
+
+\pard{\pntext\f1 4.\tab}{\*\pn\pnlvlbody\pnf1\pnindent0\pnstart1\pndec{\pntxta.}}\fi-360\li720
+\b Accurate Extraction:\b0  Direct file path reading ensures no metadata loss, unlike tensor-based approaches that can lose embedded information\par
+\pard\sa200\sl276\slmult1\par
+
+\fs28\b Use Cases\b0\fs22\par
+This workflow is valuable for:\par
+
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720
+\b Photography Workflows:\b0  Extracting camera settings and shooting parameters\par
+{\pntext\f1\'B7\tab}\b AI Art Attribution:\b0  Reading creator, copyright, and generation metadata\par
+{\pntext\f1\'B7\tab}\b Content Authentication:\b0  Verifying image source and provenance\par
+{\pntext\f1\'B7\tab}\b Metadata Auditing:\b0  Discovering what metadata exists in image files\par
+{\pntext\f1\'B7\tab}\b Rights Management:\b0  Extracting copyright and licensing information\par
+{\pntext\f1\'B7\tab}\b Archival Systems:\b0  Cataloging images with complete metadata\par
+{\pntext\f1\'B7\tab}\b Quality Control:\b0  Validating metadata embedding in image processing pipelines\par
+\pard\sa200\sl276\slmult1\par
+
+\fs28\b Technical Requirements\b0\fs22\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720
+\b ExifTool:\b0  Version 13.44 or compatible\par
+{\pntext\f1\'B7\tab}\b ComfyUI:\b0  With FFpy custom nodes installed\par
+{\pntext\f1\'B7\tab}\b Image Formats:\b0  PNG, JPEG, TIFF, and 500+ other formats supported by ExifTool\par
+\pard\sa200\sl276\slmult1\par
+
+\fs28\b Conclusion\b0\fs22\par
+The "Read EXIF data from file" workflow provides a robust, professional-grade solution for metadata extraction in ComfyUI. Its dual-mode display, direct file access architecture, and comprehensive format support make it suitable for both traditional photography and modern AI-generated imagery. Testing with camera images (Willow River) and AI-generated images (Snow Tiger) confirms its versatility and reliability across diverse image sources.\par
+
+\pard\qc\sa200\sl276\slmult1
+_______________________________________________\par
+
+\pard\sa200\sl276\slmult1
+\b Document Version:\b0  1.0\par
+\b Last Updated:\b0  December 22, 2025\par
+\b Author:\b0  Kevin Green\par
+\b Tool:\b0  FFpy ExifTool Node for ComfyUI\par
+}
