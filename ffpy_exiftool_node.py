@@ -48,7 +48,7 @@ class FFpyExifToolNode:
     RETURN_TYPES = ("IMAGE", "STRING", "STRING")
     RETURN_NAMES = ("image", "metadata_json", "debug_log")
     FUNCTION = "process_metadata"
-    CATEGORY = "api node/photoshop"
+    CATEGORY = "image/metadata"
 
     @classmethod
     def INPUT_TYPES(cls):

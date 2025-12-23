@@ -32,7 +32,7 @@ class FFpyAddXMPNode:
     RETURN_TYPES = ("STRING", "STRING")
     RETURN_NAMES = ("file_path", "debug_log")
     FUNCTION = "save_with_metadata"
-    CATEGORY = "api node/photoshop"
+    CATEGORY = "image/metadata"
     OUTPUT_NODE = True
 
     @classmethod

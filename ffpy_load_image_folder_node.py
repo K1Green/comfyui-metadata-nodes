@@ -29,7 +29,7 @@ class FFpyLoadImageFolderNode:
     RETURN_TYPES = ("IMAGE", "STRING", "STRING", "STRING", "INT")
     RETURN_NAMES = ("image", "file_path", "filename", "debug_log", "total_images")
     FUNCTION = "load_image"
-    CATEGORY = "api node/photoshop"
+    CATEGORY = "image/metadata"
 
     @classmethod
     def INPUT_TYPES(cls):
