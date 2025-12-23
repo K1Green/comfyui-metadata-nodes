@@ -45,9 +45,9 @@
       "custom_metadata": "",
       "output_path": ""
     },
-    "class_type": "FFpySaveWithMetadataNode",
+    "class_type": "FFpyAddXMPNode",
     "_meta": {
-      "title": "Save with Metadata"
+      "title": "Add XMP to Image"
     }
   },
   "4": {
