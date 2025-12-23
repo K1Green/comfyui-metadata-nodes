@@ -6,7 +6,7 @@ Professional EXIF, XMP, and IPTC metadata workflows for ComfyUI. Works with both
 
 Three powerful custom nodes that bring professional-grade metadata capabilities to ComfyUI:
 
-- **FFpy Save with Metadata** - Save images with embedded XMP metadata (title, keywords, creator, copyright)
+- **FFpy Add XMP to Image** - Add XMP metadata to images and save with embedded metadata (title, keywords, creator, copyright)
 - **FFpy Load Image from Folder** - Load images from folders while preserving file path for metadata access
 - **FFpy ExifTool (Advanced Metadata)** - Read and write 171+ metadata fields using ExifTool 13.44
 
@@ -132,9 +132,9 @@ This package was tested with two distinct image types:
 
 ## Node Documentation
 
-### FFpy Save with Metadata
+### FFpy Add XMP to Image
 
-Save images to disk with embedded XMP metadata.
+Add XMP metadata to images and save to disk with embedded metadata.
 
 **Inputs:**
 - `image` - Image tensor to save
@@ -280,7 +280,7 @@ comfyui-metadata-nodes/
 ├── requirements.txt                       # Python dependencies
 ├── .gitignore                             # Git ignore rules
 ├── __init__.py                            # Node registration
-├── ffpy_save_with_metadata_node.py        # Save with metadata
+├── ffpy_add_xmp_node.py                   # Add XMP to image
 ├── ffpy_load_image_folder_node.py         # Load from folder
 ├── ffpy_exiftool_node.py                  # ExifTool integration
 └── workflow_metadata_roundtrip.json       # Demo workflow
@@ -320,7 +320,7 @@ MIT License - see [LICENSE](LICENSE) file
 
 ### v1.0.0 (2025-12-22)
 - Initial release
-- FFpy Save with Metadata node
+- FFpy Add XMP to Image node
 - FFpy Load Image from Folder node
 - FFpy ExifTool node with read/write support
 - Complete metadata roundtrip workflow

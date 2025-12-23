@@ -1,8 +1,8 @@
 """
-FFpy Save Image with Metadata Node
+FFpy Add XMP to Image Node
 
-Saves images with XMP metadata embedded in the PNG file.
-This node works with FFpy Add XMP node to preserve metadata through the save process.
+Adds XMP metadata to images and saves them with embedded metadata.
+Embeds title, description, keywords, creator, copyright, and other metadata directly into PNG files.
 """
 
 from __future__ import annotations
@@ -21,12 +21,12 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-class FFpySaveWithMetadataNode:
+class FFpyAddXMPNode:
     """
-    Save images with XMP metadata embedded.
+    Add XMP metadata to images and save with embedded metadata.
 
-    This node preserves metadata that would be lost in ComfyUI's standard save process.
-    Works perfectly with FFpy Add XMP to Image node.
+    This node embeds XMP metadata directly into PNG files, preserving
+    title, description, keywords, creator, copyright, and other metadata.
     """
 
     RETURN_TYPES = ("STRING", "STRING")

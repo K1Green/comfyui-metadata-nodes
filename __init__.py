@@ -6,18 +6,18 @@ Author: Kevin Green
 License: MIT
 """
 
-from .ffpy_save_with_metadata_node import FFpySaveWithMetadataNode
+from .ffpy_add_xmp_node import FFpyAddXMPNode
 from .ffpy_load_image_folder_node import FFpyLoadImageFolderNode
 from .ffpy_exiftool_node import FFpyExifToolNode
 
 NODE_CLASS_MAPPINGS = {
-    "FFpySaveWithMetadataNode": FFpySaveWithMetadataNode,
+    "FFpyAddXMPNode": FFpyAddXMPNode,
     "FFpyLoadImageFolderNode": FFpyLoadImageFolderNode,
     "FFpyExifToolNode": FFpyExifToolNode,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "FFpySaveWithMetadataNode": "FFpy Save with Metadata",
+    "FFpyAddXMPNode": "FFpy Add XMP to Image",
     "FFpyLoadImageFolderNode": "FFpy Load Image from Folder",
     "FFpyExifToolNode": "FFpy ExifTool (Advanced Metadata)",
 }
